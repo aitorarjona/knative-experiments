@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: rendezvous
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/window: "30s"
+        autoscaling.knative.dev/maxScale: "1"
+        autoscaling.knative.dev/target: "1000"
+    spec:
+      containers:
+        - image: docker.io/aitorarjona/ce-rend:0.3

@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sockets
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/window: "30s"
+        autoscaling.knative.dev/maxScale: "100"
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: docker.io/aitorarjona/ce-work:0.11
+          env:
+          - name: RENDEZVOUS_ENDPOINT
+            value: "https://rendezvous.349f13c4-e146.us-south.codeengine.appdomain.cloud"
